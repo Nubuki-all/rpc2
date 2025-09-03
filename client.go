@@ -209,11 +209,15 @@ func (c *Client) readResponse(resp *Response) error {
 		if err != nil {
 			err = errors.New("reading error body: " + err.Error())
 		}
-	case resp.Error != "":
+	case resp.Error != "" || resp.Err != nil:
 		// We've got an error response. Give this to the request;
 		// any subsequent requests will get the ReadResponseBody
 		// error if there is one.
-		call.Error = ServerError(resp.Error)
+		if resp.Error != "" {
+			call.Error = ServerError(resp.Error)
+		} else {
+			call.Error = resp.Err // or custom error
+		}
 		err = c.codec.ReadResponseBody(nil)
 		if err != nil {
 			err = errors.New("reading error body: " + err.Error())

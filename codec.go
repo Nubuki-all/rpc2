@@ -45,6 +45,7 @@ type Request struct {
 type Response struct {
 	Seq   uint64 // echoes that of the request
 	Error string // error, if any.
+	Err error // error interface, if any
 }
 
 type gobCodec struct {

@@ -128,10 +128,11 @@ func (c *jsonCodec) ReadHeader(req *rpc2.Request, resp *rpc2.Response) error {
 		resp.Error = ""
 		resp.Seq = c.clientResponse.Id
 		if c.clientResponse.Error != nil || c.clientResponse.Result == nil {
-			x, ok := c.clientResponse.Error.(string)
-			if !ok {
+			b, err := json.Marshal(c.clientResponse.Error)
+			if err != nil {
 				return fmt.Errorf("invalid error %v", c.clientResponse.Error)
 			}
+			x := string(b)
 			if x == "" {
 				x = "unspecified error"
 			}
