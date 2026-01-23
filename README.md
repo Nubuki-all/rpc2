@@ -1,18 +1,20 @@
 rpc2
 ====
 
-[![GoDoc](https://godoc.org/github.com/cenkalti/rpc2?status.png)](https://godoc.org/github.com/cenkalti/rpc2)
+[![GoDoc](https://godoc.org/github.com/nubuki-all/rpc2?status.png)](https://godoc.org/github.com/nubuki-all/rpc2)
 
-rpc2 is a fork of net/rpc package in the standard library.
+nubuki-all/rpc2 is a fork of cenkalti/rpc2 which is a fork of net/rpc package in the standard library.
 The main goal is to add bi-directional support to calls.
 That means server can call the methods of client.
 This is not possible with net/rpc package.
 In order to do this it adds a `*Client` argument to method signatures.
 
+The difference of this fork from the original is the support of custom error interface instead of the default ServerError
+
 Install
 --------
 
-    go get github.com/cenkalti/rpc2
+    go get github.com/nubuki-all/rpc2
 
 Example server
 ---------------
@@ -24,7 +26,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/cenkalti/rpc2"
+	"github.com/nubuki-all/rpc2"
 )
 
 type Args struct{ A, B int }
@@ -58,7 +60,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/cenkalti/rpc2"
+	"github.com/nubuki-all/rpc2"
 )
 
 type Args struct{ A, B int }
